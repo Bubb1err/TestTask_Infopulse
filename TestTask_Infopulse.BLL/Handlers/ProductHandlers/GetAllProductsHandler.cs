@@ -24,7 +24,8 @@ namespace TestTask_Infopulse.BLL.Handlers.ProductHandlers
         }
         public async Task<List<ProductDTO>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
-            var products = await _productsRepository.GetAll().ToListAsync();
+            var products = await _productsRepository.GetAll(include: 
+                source => source.Include(p => p.Category)).ToListAsync();
             var productsDto = _mapper.Map<List<ProductDTO>>(products);
             return productsDto;
         }

@@ -10,6 +10,6 @@ namespace TestTask_Infopulse.BLL.ViewModels
         public ProductCategoryDTO ProductCategory { get; set; }
         public int AvailableQuantity { get; set; }
         public decimal Price { get; set; }
-        public ProductSize ProductSize { get; set; }
+        public string ProductSize { get; set; }
     }
 }
