@@ -11,7 +11,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="7.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.3.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +25,47 @@
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\app\create-order\create-order.component.ts" />
+    <None Remove="ClientApp\src\app\customers\customers.component.ts" />
+    <None Remove="ClientApp\src\app\models\createOrder.ts" />
+    <None Remove="ClientApp\src\app\models\customer.ts" />
+    <None Remove="ClientApp\src\app\models\order.ts" />
+    <None Remove="ClientApp\src\app\models\orderedProduct.ts" />
+    <None Remove="ClientApp\src\app\models\product.ts" />
+    <None Remove="ClientApp\src\app\models\selectListCustomer.ts" />
+    <None Remove="ClientApp\src\app\models\status.ts" />
+    <None Remove="ClientApp\src\app\orders\orders.component.ts" />
+    <None Remove="ClientApp\src\app\products\products.component.ts" />
+    <None Remove="ClientApp\src\app\services\create-order.service.ts" />
+    <None Remove="ClientApp\src\app\services\orders.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TestTask_Infopulse.BLL\TestTask_Infopulse.BLL.csproj" />
+    <ProjectReference Include="..\TestTask_Infopulse.DataAccess\TestTask_Infopulse.DataAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\create-order\create-order.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\customers\customers.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\createOrder.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\customer.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\order.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\orderedProduct.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\product.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\selectListCustomer.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\status.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\orders\orders.component.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\products\products.component.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\services\create-order.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\orders.service.ts" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

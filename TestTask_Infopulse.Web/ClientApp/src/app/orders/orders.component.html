@@ -1,0 +1,69 @@
+
+<div class="content-orders">
+  <div class="header-content">
+    <h1>Orders</h1>
+    <div>
+      <button class="new-order-btn" (click)="openOrdersForm()">New Order</button>
+    </div>
+  </div>
+
+  <div class="table-content">
+    <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="orders.length">
+      <tr>
+        <th>
+          <div class="table-header-block">
+            Order Number
+          </div>
+        </th>
+        <th>
+          <div class="table-header-block">
+            Customer Name
+           </div>
+        </th>
+        <th>
+          <div class="table-header-block">
+            Customer Address
+           </div>
+        </th>
+        <th>
+          <div class="table-header-block">
+            Total Cost
+          </div>
+        </th>
+        <th>
+          <div class="table-header-block">
+            Status
+          </div>
+        </th>
+      </tr>
+      <tr *ngFor="let order of orders; let i = index">
+        <td>
+          <div class="table-content-block" [ngClass]="{ 'white-row': i % 2 === 0, 'blue-row': i % 2 !== 0 }">
+            <a href="#">{{ order.orderNumber }}</a>
+          </div>
+        </td>
+        <td>
+          <div class="table-content-block" [ngClass]="{ 'white-row': i % 2 === 0, 'blue-row': i % 2 !== 0 }">
+            {{ order.customerName }}
+          </div>
+        </td>
+        <td>
+          <div class="table-content-block" [ngClass]="{ 'white-row': i % 2 === 0, 'blue-row': i % 2 !== 0 }">
+            {{ order.customerAddress }}
+          </div>
+        </td>
+        <td>
+          <div class="table-content-block" [ngClass]="{ 'white-row': i % 2 === 0, 'blue-row': i % 2 !== 0 }">
+            {{ order.totalCost | currency }}
+          </div>
+        </td>
+        <td>
+          <div class="table-content-block" [ngClass]="{ 'white-row': i % 2 === 0, 'blue-row': i % 2 !== 0 }">
+            {{ order.status }}
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+

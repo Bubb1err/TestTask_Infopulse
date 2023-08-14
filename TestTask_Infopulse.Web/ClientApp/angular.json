@@ -132,5 +132,8 @@
       }
     }
   },
-  "defaultProject": "TestTask_Infopulse.Web"
+  "defaultProject": "TestTask_Infopulse.Web",
+  "cli": {
+    "analytics": false
+  }
 }

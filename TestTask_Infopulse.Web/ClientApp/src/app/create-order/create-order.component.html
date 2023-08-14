@@ -1,0 +1,122 @@
+<div class="createOrderContent">
+  <h1>New order</h1>
+  <form [formGroup]="formOrder" (ngSubmit)="saveOrder()" class="createCustomerFrom">
+    <div class="order-info">
+      <div class="order-info-block me-5">
+        <label class="me-5">Order Number:</label>
+        <p>{{newOrderNumber}}</p>
+      </div>
+      <div class="order-info-block">
+        <label class="me-5">Order Date:</label>
+        <p class="me-5">{{currentDate}}</p>
+      </div>
+    </div>
+    <div class="select">
+      <label class="me-5">Customer:</label>
+      <select class="order-select" [(ngModel)]="selectedValue" formControlName="Customer">
+        <option *ngFor="let item of selectCustomers" [value]="item.id">{{ item.customerName }}</option>
+      </select>
+    </div>
+    <div class="select">
+      <label class="me-5">Status:</label>
+      <select class="order-select" [(ngModel)]="selectedStatusValue" formControlName="Status">
+        <option *ngFor="let item of selectStatuses" [value]="item.id">{{ item.title }}</option>
+      </select>
+    </div>
+
+    <div class="total-cost-block">
+      <label class="me-5">Total Cost:</label>
+      <p>{{totalCost | currency}}</p>
+    </div>
+
+    <div>
+      <div class="products-nav">
+        <h3>Add products:</h3>
+        <button (click)="addProducts()" class="order-btn">Add Products To Order</button>
+      </div>
+      <table class='table table-striped' aria-labelledby="tableLabel">
+        <tr>
+          <th>
+            <div class="table-header-block">
+              Product Id
+            </div>
+          </th>
+          <th>
+            <div class="table-header-block">
+              Product Name
+            </div>
+          </th>
+          <th>
+            <div class="table-header-block">
+              Product Category
+            </div>
+          </th>
+          <th>
+            <div class="table-header-block">
+              Product Size
+            </div>
+          </th>
+          <th>
+            <div class="table-header-block">
+              Quantity
+            </div>
+          </th>
+          <th>
+            <div class="table-header-block">
+              Price
+            </div>
+          </th>
+        </tr>
+        <!--here must be logic of adding products-->
+        <tr *ngFor="let product of products; let i = index">
+          <td>
+            <div class="table-content-block" [ngClass]="{ 'white-row': i % 2 === 0, 'blue-row': i % 2 !== 0 }">
+              <a href="#"></a>
+            </div>
+          </td>
+          <td>
+            <div class="table-content-block" [ngClass]="{ 'white-row': i % 2 === 0, 'blue-row': i % 2 !== 0 }">
+
+            </div>
+          </td>
+          <td>
+            <div class="table-content-block" [ngClass]="{ 'white-row': i % 2 === 0, 'blue-row': i % 2 !== 0 }">
+
+            </div>
+          </td>
+          <td>
+            <div class="table-content-block" [ngClass]="{ 'white-row': i % 2 === 0, 'blue-row': i % 2 !== 0 }">
+
+            </div>
+          </td>
+          <td>
+            <div class="table-content-block" [ngClass]="{ 'white-row': i % 2 === 0, 'blue-row': i % 2 !== 0 }">
+
+            </div>
+          </td>
+          <td>
+            <div class="table-content-block" [ngClass]="{ 'white-row': i % 2 === 0, 'blue-row': i % 2 !== 0 }">
+
+            </div> 
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="comment-block">
+      <label>Comment: </label>
+      <textarea formControlName="Comment"></textarea>
+    </div>
+
+    <div class="buttons">
+        <p class="error" *ngIf="customer.errors?.required && customer.touched">Customer is required.</p>
+      <br />
+        <p class="error" *ngIf="status.errors?.required && status.touched">Status is required.</p>
+      <br />
+        <button class="order-btn me-2" type="submit">Save</button>
+        <button class="order-btn" (click)="backToOrders()">Cancel</button>
+    </div>
+
+  </form>
+</div>
+
+

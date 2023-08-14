@@ -1,0 +1,22 @@
+.nav-block {
+    margin-top: 2rem;
+}
+.nav-btn {
+    padding: 5px 30px;
+    border: 2px solid #000000;
+    background-color: #b9b9b9;
+    margin-right: 2rem;
+    color: #000000;
+    font-weight: 700;
+    border-radius: 5%;
+}
+.nav-btn:hover {
+    background-color: #919cc7;
+}
+.content {
+  margin: 5rem auto;
+}
+.buttons {
+    margin-bottom: 2rem;
+}
+

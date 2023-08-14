@@ -1,18 +1,41 @@
+using Microsoft.AspNetCore.Mvc;
+using NLog;
+using NLog.Extensions.Logging;
+using TestTask_Infopulse.BLL;
+using TestTask_Infopulse.BLL.Extensions;
+using TestTask_Infopulse.BLL.Services.LoggerService;
+using TestTask_Infopulse.DataAccess;
+using TestTask_Infopulse.Web;
+using TestTask_Infopulse.Web.Middlewares;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+string connectionString = builder.Configuration.GetConnectionString("SQLConnection");
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddSqlServer(connectionString)
+    .AddUnitOfWork<AppDbContext>()
+    .AddRepositories();
+builder.Services.AddResponseCaching();
+builder.Services.AddControllers(options =>
+{
+    options.CacheProfiles.Add(CacheProfiles.FiveSeconds, new CacheProfile
+    {
+        Duration = 5
+    });
+});
+builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(MediatrEntryPoint).Assembly));
+builder.Services.AddSingleton<ILoggerManager, LoggerManager>();
+builder.Services.AddAutoMapper(typeof(MediatrEntryPoint).Assembly);
+builder.Services.AddEndpointsApiExplorer();
+LogManager.Configuration = new NLogLoggingConfiguration(builder.Configuration.GetSection("NLog"));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
